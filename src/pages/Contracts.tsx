@@ -14,18 +14,28 @@ const availableContracts = [
     {
         name: "US Government",
         icon: "../assets/us.png",
-        contractValue: 180000000.00
+        contractValue: 440000000.00
     },
     {
         name: "Private investors",
-        icon: ""
+        icon: "../assets/mutual-fund.png",
+        contractValue: 200000000
+    },
+    {
+        name: "Brazilian government",
+        icon: "../assets/brazil.png",
+        contractValue: 180000000
     }
 ]
 
 const Contracts: React.FC = () => {
     return(
-        <p>Teste</p>
-    );
+        <></>
+        // <h2>Available contracts:</h2>
+        // <ul>
+        //     <li></li>
+        // </ul>
+   );
 }
 
 export default Contracts;
