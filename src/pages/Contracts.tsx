@@ -41,7 +41,7 @@ export function Contracts() {
             {availableContracts.map((c) => {
                 return (
                     <div>
-                        <div><img src={c.icon}></img></div>
+                        <div><img className="h-48 w-48" src={c.icon}></img></div>
                         <h3>{c.name}</h3>
                         <p>{c.description}</p>
                         <button>Accept contract</button>
