@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { About, Orbit, Home, Contracts } from "./pages";
+import Rocket from "./pages/Rocket";
 import { ContextProviders } from "./context";
 
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/orbit" element={<Orbit />} />
         <Route path="/contracts" element={<Contracts />} />
+        <Route path="/rocket" element={<Rocket />} />
       </Routes>
     </BrowserRouter>
   );
