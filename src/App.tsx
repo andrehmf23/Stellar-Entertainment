@@ -2,26 +2,30 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
+import { About, Orbit, Home, Contracts } from "./pages";
+import { ContextProviders } from "./context";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <nav>
-        <Link to="/">Home</Link> | <Link to="/about">About</Link>
+        <Link to="/">Dashboard</Link> | <Link to="/contracts">Contracts</Link>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/orbit" element={<Orbit />} />
+        <Route path="/contracts" element={<Contracts />} />
       </Routes>
     </BrowserRouter>
   );
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />
+  <ContextProviders>
+    <App />
+  </ContextProviders>
 );
 
 export default App;
