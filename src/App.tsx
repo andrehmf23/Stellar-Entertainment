@@ -4,17 +4,19 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Contracts from "./pages/Contracts";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <nav>
-        <Link to="/">Home</Link> | <Link to="/about">About</Link>
+        <Link to="/">Dashboard</Link> | <Link to="/contracts">Contracts</Link>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contracts" element={<Contracts />} />
       </Routes>
     </BrowserRouter>
   );
