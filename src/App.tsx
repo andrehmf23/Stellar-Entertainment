@@ -2,9 +2,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contracts from "./pages/Contracts";
+import { About, Orbit, Home, Contracts } from "./pages";
+import { ContextProviders } from "./context";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +15,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/orbit" element={<Orbit />} />
         <Route path="/contracts" element={<Contracts />} />
       </Routes>
     </BrowserRouter>
@@ -23,7 +23,9 @@ const App: React.FC = () => {
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />
+  <ContextProviders>
+    <App />
+  </ContextProviders>
 );
 
 export default App;
