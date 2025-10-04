@@ -68,3 +68,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+html, body, #root {
+  margin: 0;       /* remove margens padrão do body */
+  padding: 0;      /* remove padding padrão */
+  width: 100vw;    /* largura total da viewport */
+  height: 100vh;   /* altura total da viewport */
+  overflow: hidden; /* opcional: remove barras de rolagem */
+}
