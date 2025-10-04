@@ -1,17 +1,15 @@
 // src/main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { About, Orbit, Home, Contracts } from "./pages";
 import { ContextProviders } from "./context";
+import { CustomHeader } from "./components/Header";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to="/">Dashboard</Link> | <Link to="/contracts">Contracts</Link>
-      </nav>
-
+      <CustomHeader />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
