@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 
 //<a href="https://www.flaticon.com/free-icons/flags" title="flags icons">Flags icons created by Marcus Christensen - Flaticon</a>
 //<a href="https://www.flaticon.com/free-icons/states" title="states icons">States icons created by amoghdesign - Flaticon</a>
@@ -9,12 +8,12 @@ import React from "react";
 const availableContracts = [
     {
         name: "European Union",
-        icon: "../assets/eu.png",
+        icon: "/assets/eu.png",
         contractValue: 25000000.00
     },
     {
         name: "US Government",
-        icon: "../assets/us.png",
+        icon: "/assets/us.png",
         contractValue: 180000000.00
     },
     {
