@@ -7,7 +7,7 @@ import Satellites from "./pages/Satellites";
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <nav className="bg-gray-800 p-4 flex gap-6">
+      <nav className="flex justify-center items-center p-4 gap-40 h-20 bg-[#0000002f]">
         <Link to="/" className="text-white font-semibold hover:text-yellow-400 transition-colors">Dashboard</Link>
         <Link to="/contracts" className="text-white font-semibold hover:text-yellow-400 transition-colors">Contracts</Link>
         <Link to="/about" className="text-white font-semibold hover:text-yellow-400 transition-colors">About</Link>

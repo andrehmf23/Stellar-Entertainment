@@ -17,7 +17,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #ffffff;
   text-decoration: inherit;
 }
 a:hover {
@@ -72,7 +72,6 @@ button:focus-visible {
 html, body, #root {
   margin: 0;       /* remove margens padrão do body */
   padding: 0;      /* remove padding padrão */
-  width: 100vw;    /* largura total da viewport */
-  height: 100vh;   /* altura total da viewport */
-  overflow: hidden; /* opcional: remove barras de rolagem */
+  height: 100%;   /* altura total da viewport */
+  width: 100%;    /* largura total da viewport */
 }
