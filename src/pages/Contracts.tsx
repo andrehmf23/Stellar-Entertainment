@@ -42,7 +42,6 @@ export function Contracts() {
 
     return(
         <div>
-
             <div className="p-3">
                 <h2 className="text-xl">Available contracts:</h2>
                 <ul>
