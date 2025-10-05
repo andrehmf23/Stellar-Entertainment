@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { About, Orbit, Home, Contracts } from "./pages";
 import Rocket from "./pages/Rocket";
+import Satellites from "./pages/Satellites";
 import { ContextProviders } from "./context";
 
 const App: React.FC = () => {
