@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { About, Orbit, Home, Contracts, Rocket, Satellites } from "./pages";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { About, Contracts, Home, Orbit, Rocket, Satellites } from "./pages";
 
 export default function App() {
     return (
