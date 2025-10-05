@@ -13,20 +13,12 @@ export function Header() {
             link: routes.contracts,
         },
         {
-            name: "About",
-            link: routes.about,
+            name: "Rocket",
+            link: routes.rocket,
         },
         {
             name: "Orbit",
             link: routes.orbit,
-        },
-        {
-            name: "Rocket",
-            link: routes.rocket,
-        },
-        {
-            name: "Rocket",
-            link: routes.rocket,
         },
     ];
 
