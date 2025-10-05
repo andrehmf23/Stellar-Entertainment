@@ -1,52 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { US, BR, EU } from 'country-flag-icons/react/3x2'
+import { useNavigate } from "react-router-dom";
 
+import { countries, fuelTypes, rockets, type IContract } from "../interfaces";
+import { useApp } from "../context";
 import { randomInt } from "../utils";
-import type { IContract } from "../interfaces";
-
-const rockets: string[] = [
-  "Saturn V",
-  "Falcon 9",
-  "Falcon Heavy",
-  "Starship",
-  "Atlas V",
-  "Delta IV Heavy",
-  "Ariane 5",
-  "Ariane 6",
-  "Soyuz",
-  "Proton-M",
-  "Long March 2F",
-  "Long March 5",
-  "H-IIA",
-  "H3",
-  "GSLV Mk III",
-  "PSLV",
-  "Vega",
-  "Electron",
-  "Neutron",
-  "New Shepard",
-  "New Glenn",
-  "Vulcan Centaur",
-  "Minotaur IV",
-  "Antares",
-  "Pegasus"
-];
-
-
-const countries = [
-    { name: "United States", code: "US", icon: US },
-    { name: "Brazil", code: "BR", icon: BR },
-    { name: "European Union", code: "EU", icon: EU },
-];
+import { routes } from "../routes";
 
 export function Contracts() {
+    const app = useApp();
+    const navigate = useNavigate();
     const [contracts, setContracts] = useState<IContract[]>([]);
 
     const signContract = (contract: IContract) => {
-        console.log("Contract signed with " + contract.name);
-    }
+        app.setCurrentContract(contract);
+        navigate(routes.rocket);
+    };
+
+    const rejectContract = (contract: IContract) => {
+        setContracts((prevContracts) =>
+            prevContracts.filter((c) => c !== contract)
+        );
+    };
 
     function createContract() {
         const randomCountry = countries[randomInt(0, countries.length - 1)];
@@ -56,67 +32,92 @@ export function Contracts() {
             name: rocketName,
             description: `A new contract from ${randomCountry.name} to launch a rocket called ${rocketName}.`,
             icon: randomCountry.icon,
-            contractValue: randomInt(50000000, 500000000)
-        }
+            contractValue: randomInt(50000000, 500000000),
+            fuelType: fuelTypes[randomInt(0, fuelTypes.length - 1)],
+            country: randomCountry.name,
+            fuel_mass: randomInt(50000, 500000),
+            rocket_mass: randomInt(50000, 500000),
+        };
 
         setContracts((prevContracts) => [...prevContracts, newContract]);
     }
 
     useEffect(() => {
-        let n = 0;
-
-        while (n < 5) {
+        for (let i = 0; i < 2; i++) {
             createContract();
-            n++;
         }
+
+        const interval = setInterval(() => {
+            const nextDelay = randomInt(30000, 60000);
+
+            createContract();
+
+            clearInterval(interval);
+            setTimeout(() => {
+                interval;
+            }, nextDelay);
+        }, randomInt(30000, 60000));
+
+        return () => clearInterval(interval);
     }, []);
 
-    return(
+    return (
         <div>
             <div className="p-3">
-                <h2 className="text-xl">Available contracts:</h2>
-                <ul>
+                <h2 className="text-xl">Available contracts</h2>
+                <div className="flex flex-wrap justify-evenly">
                     {contracts.map((c, index) => {
                         return (
-                            <li key={index}>
-                                <div className="max-w-150 bg-gray-800 m-3 p-3 rounded-sm flex gap-2">
-                                    <div className="h-12 w-12 bg-gray-700 rounded-full flex items-center justify-center">
-                                        <c.icon className="h-11 w-11" src={c.icon}></c.icon>
-                                    </div>
-                                    <div className="grow">
-                                        <h3>{c.name}</h3>
-                                        <p className="text-xs">{c.description}</p>
-                                        <div className="flex place-content-between mt-3">
-                                            <p className="text-xs">Contract value: <span className="text-green-300">
-                                                { c.contractValue.toLocaleString
-                                                (
-                                                    'en-US', {style: 'currency',currency: 'USD',}
+                            <div
+                                key={index}
+                                className="w-full max-w-150 my-3 p-3 flex gap-2 border border-gray-400 bg-gray-800 rounded-sm"
+                            >
+                                <div className="h-12 w-12 bg-gray-700 rounded-full flex items-center justify-center">
+                                    <c.icon
+                                        className="h-11 w-11 rounded-full"
+                                        src={c.icon}
+                                    ></c.icon>
+                                </div>
+                                <div className="grow">
+                                    <h3>{c.name}</h3>
+                                    <p className="text-xs">{c.description}</p>
+                                    <div className="mt-4 flex justify-between items-center">
+                                        <p className="text-xs">
+                                            Contract value:{" "}
+                                            <span className="text-green-300">
+                                                {c.contractValue.toLocaleString(
+                                                    "en-US",
+                                                    {
+                                                        style: "currency",
+                                                        currency: "USD",
+                                                    }
                                                 )}
                                             </span>
-                                            </p>
-                                            <button onClick={() => signContract(c)} className="!bg-green-500 !p-1 !text-xs">Accept contract</button>
+                                        </p>
+                                        <div className="flex gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => signContract(c)}
+                                                className="text-black !bg-[#E7F434] !p-1 !text-xs !rounded"
+                                            >
+                                                Accept
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    rejectContract(c)
+                                                }
+                                                className="!bg-red-500 !p-1 !text-xs !rounded"
+                                            >
+                                                Reject
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </div>
                         );
                     })}
-                </ul>
-                <p className="text-[10px] opacity-50">We have used a few icons in the creation of this page, and they have asked to be credited. Thus, here are their links:</p>
-                <ul>
-                    <li className="h-3">
-                        <a className="text-[10px] opacity-75" href="https://www.flaticon.com/free-icons/flags" title="flags icons">Flags icons created by Marcus Christensen - Flaticon</a>
-                    </li>
-                    <li className="h-3">
-                        <a className="text-[10px] opacity-75" href="https://www.flaticon.com/free-icons/states" title="states icons">States icons created by amoghdesign - Flaticon</a>
-                    </li>
-                    <li className="h-3">
-                        <a className="text-[10px] opacity-75" href="https://www.flaticon.com/free-icons/investors" title="investors icons">Investors icons created by afif fudin - Flaticon</a>
-                    </li>
-                    <li className="h-3">
-                        <a className="text-[10px] opacity-75" href="https://www.flaticon.com/free-icons/brazil" title="brazil icons">Brazil icons created by iconset.co - Flaticon</a>
-                    </li>
-                </ul>
+                </div>
             </div>
         </div>
     );

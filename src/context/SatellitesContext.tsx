@@ -5,7 +5,6 @@ import React, { createContext, useContext, useState } from "react";
 // Satellite interface
 interface ISatellite {
   name: string;
-  size: string;
   country: string;
 }
 

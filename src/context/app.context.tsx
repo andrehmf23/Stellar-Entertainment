@@ -1,24 +1,28 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-
-interface IApp {};
+import type { IContract } from "../interfaces";
 
 interface IAppContext {
-    config: IApp;
+    currentContract?: IContract;
+    setCurrentContract: (contract: IContract | undefined) => void;
 }
 
 export const AppContext = createContext<IAppContext>({
-    config: {}
+    currentContract: undefined,
+    setCurrentContract: () => {}
 });
 
 export const useApp = () => useContext(AppContext);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-    const [config, setConfig] = useState<IApp>({});
+    const [currentContract, setCurrentContract] = useState<IContract | undefined>(undefined);
 
     return (
-        <AppContext.Provider value={{ config }}>
+        <AppContext.Provider value={{ 
+            currentContract,
+            setCurrentContract
+        }}>
             {children}
         </AppContext.Provider>
     );
