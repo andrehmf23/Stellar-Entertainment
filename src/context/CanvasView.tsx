@@ -15,14 +15,14 @@ export function CanvasView() {
     let animationFrameId: number;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-    const earthRadius = 50;
+    const earthRadius = 0;
     const satelliteRadius = 10;
-    const orbitRadius = 100;
+    const orbitRadius = 140;
     let angle = 0;
 
     const earthImage = new Image();
     // Coloque a imagem que você quer usar na pasta /public do seu projeto
-    earthImage.src = "/partial-earth.png";
+    earthImage.src = "/earth.png";
 
     // Garante que a animação só comece depois que a imagem for carregada
     earthImage.onload = () => {
@@ -31,8 +31,8 @@ export function CanvasView() {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         // Define o novo tamanho para a imagem
-        const imageWidth = 100; // Nova largura em pixels
-        const imageHeight = 100; // Nova altura em pixels
+        const imageWidth = 210; // Nova largura em pixels
+        const imageHeight = 210; // Nova altura em pixels
 
         // Desenha a imagem da Terra no centro com o novo tamanho
         const imgX = centerX - imageWidth / 2;
