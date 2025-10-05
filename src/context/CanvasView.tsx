@@ -22,7 +22,7 @@ export function CanvasView() {
 
     const earthImage = new Image();
     // Coloque a imagem que você quer usar na pasta /public do seu projeto
-    earthImage.src = "/terra.png";
+    earthImage.src = "/partial-earth.png";
 
     // Garante que a animação só comece depois que a imagem for carregada
     earthImage.onload = () => {
