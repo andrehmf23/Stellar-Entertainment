@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSatellites } from "../context/SatellitesContext";
 
-const Rocket: React.FC = () => {
+export function Rocket() {
   const { satellites, addSatellite, removeSatellite } = useSatellites();
   const [error, setError] = useState("");
   
@@ -112,5 +112,3 @@ const Rocket: React.FC = () => {
     </div>
   </>;
 };
-
-export default Rocket;

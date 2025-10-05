@@ -1,7 +1,6 @@
-import React from "react";
 import { useSatellites } from "../context/SatellitesContext";
 
-const Satellites: React.FC = () => {
+export function Satellites() {
   const { satellites, removeSatellite } = useSatellites();
 
   return (
@@ -33,5 +32,3 @@ const Satellites: React.FC = () => {
     </div>
   );
 };
-
-export default Satellites;

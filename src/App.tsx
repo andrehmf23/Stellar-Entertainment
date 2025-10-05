@@ -1,13 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { About, Orbit, Home, Contracts } from "./pages";
-import Rocket from "./pages/Rocket";
-import Satellites from "./pages/Satellites";
-import { ContextProviders } from "./context";
+import { About, Orbit, Home, Contracts, Rocket, Satellites } from "./pages";
 
-const App: React.FC = () => {
-  return (
+export default function App() {
+    return (
     <BrowserRouter>
       <nav className="flex justify-center items-center p-4 gap-40 h-20 bg-[#0000002f]">
         <Link to="/" className="text-white font-semibold hover:text-yellow-400 transition-colors">Dashboard</Link>
@@ -28,6 +23,4 @@ const App: React.FC = () => {
       </Routes>
     </BrowserRouter>
   );
-};
-
-export default App;
+}
