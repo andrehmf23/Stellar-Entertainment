@@ -1,3 +1,10 @@
+import { CanvasView } from "../context";
+
 export function Orbit() {
-    return <h1 className="text-red-500">Página Orbit</h1>;
+  return (
+    <div className="flex items-center p-8 gap-8">
+      
+      <CanvasView />
+    </div>
+  );
 }

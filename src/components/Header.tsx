@@ -1,13 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { About, Orbit, Home, Contracts } from "./pages";
-import Rocket from "./pages/Rocket";
-import { ContextProviders } from "./context";
+import { Link } from "react-router-dom";
 
-const App: React.FC = () => {
-  return (
-    <BrowserRouter>
+export function CustomHeader() {
+
+    return (
       <nav className="bg-gray-800 p-4 flex gap-6">
         <Link
           to="/"
@@ -40,17 +36,5 @@ const App: React.FC = () => {
           Rocket
         </Link>
       </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/orbit" element={<Orbit />} />
-        <Route path="/contracts" element={<Contracts />} />
-        <Route path="/rocket" element={<Rocket />} />
-        <Route path="/satellites" element={<Satellites />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
-
-export default App;
+    );
+}

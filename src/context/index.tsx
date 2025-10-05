@@ -15,3 +15,5 @@ export function ContextProviders({ children }: { children: React.ReactNode }) {
 
 
 export { AppProvider, useApp };
+export { CanvasView } from "./CanvasView";
+
