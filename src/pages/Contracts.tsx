@@ -35,7 +35,7 @@ export function Contracts() {
             contractValue: randomInt(50000000, 500000000),
             fuelType: fuelTypes[randomInt(0, fuelTypes.length - 1)],
             country: randomCountry.name,
-            fuel_mass: randomInt(50000, 500000),
+            fuel_mass: randomInt(9999999, 99999999),
             rocket_mass: randomInt(50000, 500000),
         };
 

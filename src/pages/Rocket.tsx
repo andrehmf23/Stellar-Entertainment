@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSatellites } from "../context/SatellitesContext";
 import { Footer } from "../components";
 import { useApp } from "../context";
+import { routes } from "../routes";
 
 export function Rocket() {
     const app = useApp();
+    const navigate = useNavigate();
     const { addSatellite } = useSatellites();
     const [error, setError] = useState("");
-    const [timeLeft, setTimeLeft] = useState(10);
+    const [timeLeft, setTimeLeft] = useState(5);
     const [active, setActive] = useState(false); // Estado do timer
     const [launching, setLaunching] = useState(false); // Estado do lançamento
     const [reseting, setReseting] = useState(false); // Estado do reset
@@ -34,6 +37,8 @@ export function Rocket() {
 
     // Timer
     useEffect(() => {
+        if (!active) return; // Não faz nada se não estiver ativo
+
         if (timeLeft === 0) {
             setLaunching(true);
             return;
@@ -44,7 +49,7 @@ export function Rocket() {
         }, 1000);
 
         return () => clearTimeout(timerId);
-    }, [timeLeft]);
+    }, [timeLeft, active]);
 
     // Resetar o foguete após animação
     useEffect(() => {
@@ -58,6 +63,14 @@ export function Rocket() {
 
         return () => clearTimeout(timer);
     }, [launching]);
+
+    useEffect(() => {
+        if (active && timeLeft === 0) {
+            setTimeout(() => {
+                navigate(routes.orbit);
+            }, 3_000);
+        }
+    }, [timeLeft, active]);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -127,15 +140,16 @@ export function Rocket() {
         // Clear error and submit
         setError("");
         addSatellite(form);
+        setActive(true); // Ativa o contador após adicionar o satélite
 
         // Reset form
-        setForm({
-            name: "",
-            fuel: "",
-            country: "",
-            fuel_mass: "",
-            rocket_mass: "",
-        });
+        // setForm({
+        //     name: "",
+        //     fuel: "",
+        //     country: "",
+        //     fuel_mass: "",
+        //     rocket_mass: "",
+        // });
     };
 
     return (
@@ -155,7 +169,13 @@ export function Rocket() {
                     {/* Timer */}
                     <div className="absolute bottom-20 left-1/6 transform -translate-x-1/2 flex flex-col border-2 border-white text-center p-4 rounded-md">
                         <p className="text-3xl font-bold">Timer</p>
-                        <p className="text-2xl font-semibold">{timeLeft}s</p>
+                        <p className="text-2xl font-semibold">
+                            {!active
+                                ? "Waiting..."
+                                : timeLeft === 0
+                                ? "Launched!"
+                                : `00:00:0${timeLeft}`}
+                        </p>
                     </div>
                 </div>
                 <div className="flex flex-col border-2 border-white p-4 rounded-md mt-20 mr-30">
