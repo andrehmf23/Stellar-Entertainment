@@ -1,0 +1,37 @@
+import React from "react";
+import { useSatellites } from "../context/SatellitesContext";
+
+const Satellites: React.FC = () => {
+  const { satellites, removeSatellite } = useSatellites();
+
+  return (
+    <div className="p-4 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Lista de Satélites</h1>
+      {satellites.length === 0 ? (
+        <p>Nenhum satélite cadastrado.</p>
+      ) : (
+        <ul className="space-y-4">
+          {satellites.map((satellite) => (
+            <li key={satellite.name} className="border p-4 rounded flex justify-between items-center">
+              <div>
+                <p><strong>Nome:</strong> {satellite.name}</p>
+                <p><strong>Altura:</strong> {satellite.height} m</p>
+                <p><strong>Peso:</strong> {satellite.weight} kg</p>
+                <p><strong>Combustível:</strong> {satellite.fuel}</p>
+                <p><strong>País:</strong> {satellite.country}</p>
+              </div>
+              <button
+                onClick={() => removeSatellite(satellite.name)}
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+              >
+                Remover
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default Satellites;

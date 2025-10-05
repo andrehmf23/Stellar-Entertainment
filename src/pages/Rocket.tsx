@@ -1,30 +1,29 @@
 import React, { useState } from 'react';
+import { useSatellites } from "../context/SatellitesContext";
 
 const Rocket: React.FC = () => {
-  const [rocketData, setRocketData] = useState({
-    name: '',
-    height: '',
-    weight: '',
-    fuel: '',
-    country: ''
+  const { satellites, addSatellite, removeSatellite } = useSatellites();
+  const [error, setError] = useState("");
+  
+  const [form, setForm] = useState({
+    name: "",
+    height: "",
+    weight: "",
+    fuel: "",
+    country: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRocketData({
-      ...rocketData,
-      [e.target.name]: e.target.value
+    setForm({ 
+      ...form, 
+      [e.target.name]: e.target.value 
     });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Dados do foguete:\n
-      Nome: ${rocketData.name}\n
-      Altura: ${rocketData.height} m\n
-      Peso: ${rocketData.weight} kg\n
-      Combustível: ${rocketData.fuel}\n
-      País: ${rocketData.country}
-    `);
+    addSatellite(form);
+    setForm({ name: "", height: "", weight: "", fuel: "", country: "" });
   };
 
   return (
@@ -35,7 +34,7 @@ const Rocket: React.FC = () => {
           type="text"
           name="name"
           placeholder="Nome do foguete"
-          value={rocketData.name}
+          value={form.name}
           onChange={handleChange}
           className="border p-2 rounded"
           required
@@ -44,7 +43,7 @@ const Rocket: React.FC = () => {
           type="number"
           name="height"
           placeholder="Altura (m)"
-          value={rocketData.height}
+          value={form.height}
           onChange={handleChange}
           className="border p-2 rounded"
           required
@@ -53,7 +52,7 @@ const Rocket: React.FC = () => {
           type="number"
           name="weight"
           placeholder="Peso (kg)"
-          value={rocketData.weight}
+          value={form.weight}
           onChange={handleChange}
           className="border p-2 rounded"
           required
@@ -62,7 +61,7 @@ const Rocket: React.FC = () => {
           type="text"
           name="fuel"
           placeholder="Combustível"
-          value={rocketData.fuel}
+          value={form.fuel}
           onChange={handleChange}
           className="border p-2 rounded"
           required
@@ -71,7 +70,7 @@ const Rocket: React.FC = () => {
           type="text"
           name="country"
           placeholder="País de origem"
-          value={rocketData.country}
+          value={form.country}
           onChange={handleChange}
           className="border p-2 rounded"
           required
