@@ -1,56 +1,87 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { US, BR, EU } from 'country-flag-icons/react/3x2'
 
-type Contract = {
-    name: string;
-    description: string;
-    icon: string;
-    contractValue: Number;
-};
+import { randomInt } from "../utils";
+import type { IContract } from "../interfaces";
 
-const AVAILABLE_CONTRACTS: Contract[] = [
-    {
-        name: "European Union",
-        description: "The EU needs a satellite to monitor shifting weather patterns along the north atlantic.",
-        icon: "../assets/eu.png",
-        contractValue: 80000000.00
-    },
-    {
-        name: "US Government",
-        description: "The department of defense needs help with its intelligence infrastructure on the straight of Malacca.",
-        icon: "../assets/us.png",
-        contractValue: 440000000.00
-    },
-    {
-        name: "Private investors",
-        description: "An independent corporation wishes to set up its own weather satellite.",
-        icon: "../assets/mutual-fund.png",
-        contractValue: 200000000
-    },
-    {
-        name: "Brazilian government",
-        description: "Brazil wants to launch a communications satellite to bolster its internet infrastructure.",
-        icon: "../assets/brazil.png",
-        contractValue: 180000000
-    }
-]
+const rockets: string[] = [
+  "Saturn V",
+  "Falcon 9",
+  "Falcon Heavy",
+  "Starship",
+  "Atlas V",
+  "Delta IV Heavy",
+  "Ariane 5",
+  "Ariane 6",
+  "Soyuz",
+  "Proton-M",
+  "Long March 2F",
+  "Long March 5",
+  "H-IIA",
+  "H3",
+  "GSLV Mk III",
+  "PSLV",
+  "Vega",
+  "Electron",
+  "Neutron",
+  "New Shepard",
+  "New Glenn",
+  "Vulcan Centaur",
+  "Minotaur IV",
+  "Antares",
+  "Pegasus"
+];
+
+
+const countries = [
+    { name: "United States", code: "US", icon: US },
+    { name: "Brazil", code: "BR", icon: BR },
+    { name: "European Union", code: "EU", icon: EU },
+];
 
 export function Contracts() {
-    const signContract = (contract: Contract) => {
+    const [contracts, setContracts] = useState<IContract[]>([]);
+
+    const signContract = (contract: IContract) => {
         console.log("Contract signed with " + contract.name);
     }
+
+    function createContract() {
+        const randomCountry = countries[randomInt(0, countries.length - 1)];
+        const rocketName = rockets[randomInt(0, rockets.length - 1)];
+
+        const newContract: IContract = {
+            name: rocketName,
+            description: `A new contract from ${randomCountry.name} to launch a rocket called ${rocketName}.`,
+            icon: randomCountry.icon,
+            contractValue: randomInt(50000000, 500000000)
+        }
+
+        setContracts((prevContracts) => [...prevContracts, newContract]);
+    }
+
+    useEffect(() => {
+        let n = 0;
+
+        while (n < 5) {
+            createContract();
+            n++;
+        }
+    }, []);
 
     return(
         <div>
             <div className="p-3">
                 <h2 className="text-xl">Available contracts:</h2>
                 <ul>
-                    {AVAILABLE_CONTRACTS.map((c, index) => {
+                    {contracts.map((c, index) => {
                         return (
                             <li key={index}>
                                 <div className="max-w-150 bg-gray-800 m-3 p-3 rounded-sm flex gap-2">
                                     <div className="h-12 w-12 bg-gray-700 rounded-full flex items-center justify-center">
-                                        <img className="h-11 w-11" src={c.icon}></img>
+                                        <c.icon className="h-11 w-11" src={c.icon}></c.icon>
                                     </div>
                                     <div className="grow">
                                         <h3>{c.name}</h3>
