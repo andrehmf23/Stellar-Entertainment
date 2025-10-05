@@ -9,37 +9,13 @@ import { ContextProviders } from "./context";
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <nav className="bg-gray-800 p-4 flex gap-6">
-        <Link
-          to="/"
-          className="text-white font-semibold hover:text-yellow-400 transition-colors"
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/contracts"
-          className="text-white font-semibold hover:text-yellow-400 transition-colors"
-        >
-          Contracts
-        </Link>
-        <Link
-          to="/about"
-          className="text-white font-semibold hover:text-yellow-400 transition-colors"
-        >
-          About
-        </Link>
-        <Link
-          to="/orbit"
-          className="text-white font-semibold hover:text-yellow-400 transition-colors"
-        >
-          Orbit
-        </Link>
-        <Link
-          to="/rocket"
-          className="text-white font-semibold hover:text-yellow-400 transition-colors"
-        >
-          Rocket
-        </Link>
+      <nav className="flex justify-center items-center p-4 gap-40 h-20 bg-[#0000002f]">
+        <Link to="/" className="text-white font-semibold hover:text-yellow-400 transition-colors">Dashboard</Link>
+        <Link to="/contracts" className="text-white font-semibold hover:text-yellow-400 transition-colors">Contracts</Link>
+        <Link to="/about" className="text-white font-semibold hover:text-yellow-400 transition-colors">About</Link>
+        <Link to="/orbit" className="text-white font-semibold hover:text-yellow-400 transition-colors">Orbit</Link>
+        <Link to="/rocket" className="text-white font-semibold hover:text-yellow-400 transition-colors">Rocket</Link>
+        <Link to="/satellites" className="text-white font-semibold hover:text-yellow-400 transition-colors">Satellites</Link>
       </nav>
 
       <Routes>
