@@ -2,29 +2,27 @@
 
 import React, { createContext, useContext, useState } from "react";
 
-// Interface de um satélite
+// Satellite interface
 interface ISatellite {
   name: string;
-  height: string;
-  weight: string;
-  fuel: string;
+  size: string;
   country: string;
 }
 
-// Interface do contexto
+// Context interface
 interface ISatellitesContext {
   satellites: ISatellite[];
   addSatellite: (satellite: ISatellite | ISatellite[]) => void;
-  removeSatellite: (name: string) => void; // remover pelo nome
+  removeSatellite: (name: string) => void; // remove by name
 }
 
-// Criando o contexto
+// Creating the context
 export const SatellitesContext = createContext<ISatellitesContext | undefined>(undefined);
 
-// Hook customizado
+// Custom hook
 export const useSatellites = () => {
   const context = useContext(SatellitesContext);
-  if (!context) throw new Error("useSatellites deve ser usado dentro de um SatellitesProvider");
+  if (!context) throw new Error("useSatellites must be used within a SatellitesProvider");
   return context;
 };
 
@@ -36,7 +34,7 @@ export function SatellitesProvider({ children }: { children: React.ReactNode }) 
     setSatellites(prev => {
       const newSatellites = Array.isArray(satellite) ? satellite : [satellite];
 
-      // Filtrar apenas os que não existem ainda (nome único)
+      // Filter only satellites that don't exist yet (unique name)
       const filtered = newSatellites.filter(
         s => !prev.some(existing => existing.name === s.name)
       );
